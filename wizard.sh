@@ -41,7 +41,7 @@ cd app_project || exit
 # Step 4: Build and run the project
 echo "🐋 Building and running your Docker project..."
 if [ -f "docker-compose.yml" ]; then
-  sudo docker-compose up --build -d
+  sudo docker compose up --build -d
 else
   echo "❌ docker-compose.yml not found in repo. Exiting."
   exit 1
