@@ -49,6 +49,6 @@ fi
 
 # Step 5: Call the NGINX Wizard
 echo "🧙 Launching NGINX Wizard..."
-bash <(curl -s https://raw.githubusercontent.com/nimiology/nginx-wizard/main/setup-nginx-ssl-ws-proxy.sh)
+bash <(curl -s https://raw.githubusercontent.com/nimiology/nginx-wizard/main/wizard.sh)
 
 echo "🎉 All done!"
