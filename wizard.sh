@@ -34,9 +34,12 @@ fi
 
 # Step 3: Clone the repo
 echo "📥 Cloning your repository..."
-git clone "$REPO_URL" app_project || { echo "❌ Clone failed. Check access or URL."; exit 1; }
+git clone "$REPO_URL" || { echo "❌ Clone failed. Check access or URL."; exit 1; }
 
-cd app_project || exit
+# Extract folder name from repo URL
+REPO_DIR=$(basename "$REPO_URL" .git)
+
+cd "$REPO_DIR" || { echo "❌ Failed to enter project directory."; exit 1; }
 
 # Step 4: Build and run the project
 echo "🐋 Building and running your Docker project..."
