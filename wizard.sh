@@ -9,20 +9,24 @@ echo "  ✅ Launch the NGINX Wizard for SSL and reverse proxy setup"
 echo
 
 # Step 1: Install Docker
-echo "🔧 Installing Docker..."
-sudo apt update
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+if command -v docker > /dev/null 2>&1; then
+  echo "✅ Docker is already installed. Skipping installation."
+else
+  echo "🔧 Installing Docker..."
+  sudo apt update
+  sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt update
-apt-cache policy docker-ce
-sudo apt install -y docker-ce
+  sudo apt update
+  apt-cache policy docker-ce
+  sudo apt install -y docker-ce
 
-echo "🔍 Checking Docker status..."
-sudo systemctl status docker --no-pager
+  echo "🔍 Checking Docker status..."
+  sudo systemctl status docker --no-pager
+fi
 
 # Step 2: Ask for GitHub repo URL
 read -p "🔗 Enter your GitHub repo URL (e.g. https://github.com/username/repo.git): " REPO_URL
